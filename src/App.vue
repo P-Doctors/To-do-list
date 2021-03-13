@@ -1,4 +1,4 @@
-<script>
+<script> // use FullCalendar
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
