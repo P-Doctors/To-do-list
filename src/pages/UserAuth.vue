@@ -7,6 +7,12 @@
     <div v-else>
       <button v-on:click="signIn">サインイン</button>
     </div>
+    <div class="memo">
+      【開発用memo】 <br>
+      Vuexについての理解深めるマン(→https://bit.ly/397CU4R) <br>
+      要は状態管理を楽にする為の手段としてシングルトン的な感じでやってる多分。 <br>
+      
+    </div>
   </div>
 </template>
 
