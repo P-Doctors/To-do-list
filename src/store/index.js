@@ -85,6 +85,7 @@ const store = new Vuex.Store({
   actions,
   getters,
 })
+
 export default store
 
 // user のログイン状態が変化したら、store を更新
