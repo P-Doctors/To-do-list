@@ -11,5 +11,14 @@
 </template>
 
 <style>
+  *{
+    margin: 0 ;
+    padding: 0 ;
+    box-sizing: border-box;
+  }
 
+  #app{
+    background-color: #67c7d4;
+    color:#ffffff;
+  }
 </style>
