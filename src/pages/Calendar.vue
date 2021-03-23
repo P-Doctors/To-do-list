@@ -47,6 +47,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { INITIAL_EVENTS, createEventId } from "../event-utils.js";
+import firebase from "firebase";
 export default {
   components: {
     FullCalendar, // make the <FullCalendar> tag available
@@ -100,6 +101,18 @@ export default {
           allDay: selectInfo.allDay,
         });
       }
+      const task = {
+        text: title
+      };
+      const today = new Date()
+      const date = String(today.getDate())
+      const minutes = String(today.getMinutes())
+      const seconds = String(today.getSeconds())
+
+      firebase.firestore().collection("tasks")
+        .doc(date+minutes+seconds)
+        .collection("tasks")
+        .add(task)
     },
     handleEventClick(clickInfo) {
       if (

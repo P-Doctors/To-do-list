@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <button v-on:click="postTasklist">Make Task</button>
+    <!-- <button v-on:click="postTasklist">Make Task</button> -->
     <div>
-      <p v-for="task in tasks" :key="task.id">
+      <header>自分の名前</header>
+      <p v-for="(task,index) in tasks" :key="index">
         {{ task.text }}
+        <button v-on:click="deleteTasklist(index)">Delete Task</button>
       </p>
+      <button>MAKE TASK<br>(YOUR FRIEND)</button>
     </div>
   </div>
 </template>
@@ -19,18 +22,22 @@ export default {
     };
   },
   methods: {
-    postTasklist() {
-      const task = {
-        text: "保存されたタスク"
-      };
-      firebase.firestore().collection("tasks")
-        .add(task)
-        .then(ref => {
-          this.tasks.push({
-            id: ref.id,
-            ...task
-          });
-        });
+    // postTasklist() {
+    //   const task = {
+    //     text: "保存されたタスク"
+    //   };
+    //   firebase.firestore().collection("tasks")
+    //     .add(task)
+    //     .then(ref => {
+    //       this.tasks.push({
+    //         id: ref.id,
+    //         ...task
+    //       });
+    //     });
+    // },
+    deleteTasklist(index){
+      firebase.firestore().collection("tasks").delete()
+      this.tasks.splice(index,1)
     }
   },
   created() {
@@ -46,6 +53,7 @@ export default {
           });
         });
       });
+      console.log(this.tasks)
   }
 };
 </script>
