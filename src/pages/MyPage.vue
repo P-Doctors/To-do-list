@@ -46,14 +46,17 @@ export default {
       .collection("tasks")
       .get()
       .then(snapshot => {
+        console.log(snapshot)
         snapshot.docs.forEach(doc => {
+          console.log("here")
           this.tasks.push({
             id: doc.id,
             ...doc.data()
           });
         });
+        console.log(this.tasks)
       });
-      console.log(this.tasks)
+      
   }
 };
 </script>
