@@ -1,30 +1,40 @@
 <template>
   <div>
-    <h1>This is Hoge</h1>
-    <div>
-      <div>【 New tweet 】</div>
-      <input type="text" v-model="tweetText"> 
-      <button v-on:click="create">Submit</button>
-    </div>
-    <hr>
-    <div>
-      <div>【 Selected tweet 】</div>
-      <div>ID : {{ selectedTweet.id }}</div> 
-      <div>Text : <input type="text" v-model="selectedTweet.text"></div>
-      <button v-on:click="update">Update</button>
-      <br>
-    </div>
-    <hr>
-    <div v-for="(document, index) in documents" v-bind:key="index">
-      <div>【 {{ index }} 】</div> 
-      <div>ID : {{ document.id }}</div> 
-      <div>Text : {{ document.data().text }}</div>
+    <header>
+      <div class="userName">
+        User Name
+      </div>      
+    </header>
+    <main>
+    <h1>Your Task</h1>
+    <div class="task-contents">
       <div>
-        <button v-on:click="remove(document)">Remove</button>
-        <button v-on:click="edit(document)">Edit</button>
+        <div>【 New tweet 】</div>
+        <input type="text" v-model="tweetText"> 
+        <button v-on:click="create">Submit</button>
       </div>
-      --- --- --- --- --- --- ---
+      <hr>
+      <div>
+        <div>【 Selected tweet 】</div>
+        <div>ID : {{ selectedTweet.id }}</div> 
+        <div>Text : <input type="text" v-model="selectedTweet.text"></div>
+        <button v-on:click="update">Update</button>
+        <br>
+      </div>
+      <hr>
+      <div class="task-content" v-for="(document, index) in documents" v-bind:key="index">
+        <div>【 {{ index }} 】</div> 
+        <div>ID : {{ document.id }}</div> 
+        <div>Text : {{ document.data().text }}</div>
+        <div>
+          <button v-on:click="remove(document)">Remove</button>
+          <button v-on:click="edit(document)">Edit</button>
+        </div>
+        --- --- --- --- --- --- ---
+      </div>
     </div>
+    </main>
+    <footer></footer>
   </div>
 </template>
 
@@ -110,4 +120,42 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  header{
+    padding: 10px;
+    position: relative;
+    text-align: right;
+  }
+
+  .userName{
+    font-size: 30px;
+  }
+
+  main{
+    background-color: #67c7d4;
+    margin: 0 auto;
+    padding: 20px;
+    height: 680px;
+  }
+
+  main h1{
+    display: flex;
+    justify-content: center;
+    font-size: 70px
+  }
+
+  .task-contents{
+    background-color: blue;
+  }
+
+  .task-content{
+    text-align: center;
+  }
+  
+  footer{
+    height: 50px;
+    background-color: #5b5b5b;
+  }
+</style>
 
