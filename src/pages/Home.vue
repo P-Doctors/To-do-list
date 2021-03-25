@@ -2,7 +2,7 @@
   <div class="contents">
     <header>
       <div class="todayDate">
-        今日の日付
+        {{setToday}}
       </div>
       <router-link to="/auth" class="button1">Sign in</router-link>
       <router-link to="/auth" class="button2">Log in</router-link>
@@ -19,6 +19,19 @@
     <footer></footer>  
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    setToday() {
+      var hiduke = new Date();
+      var month = hiduke.getMonth() + 1;
+      var day = hiduke.getDate();
+      return month + "/" + day;
+    },
+  },
+};
+</script>
 
 <style scoped>
   header{
