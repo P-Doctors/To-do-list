@@ -9,39 +9,40 @@
 import firebase from "firebase";
 
 export default {
-  data(){
+  data() {
     return {
       isAuth: false,
-    }
+    };
   },
 
   methods: {
     signIn() {
-      console.log("called siginIn")
-      const provider = new firebase.auth.GoogleAuthProvider()
+      console.log("called siginIn");
+      const provider = new firebase.auth.GoogleAuthProvider();
 
-      const vm = this
-      firebase.auth().signInWithPopup(provider)
-        .then(function(response){
-          console.log(response)
-          vm.$router.push({name: "MyPage"})
-        })
+      const vm = this;
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(function(response) {
+          console.log(response);
+          vm.$router.push({ name: "MyPage" });
+        });
     },
   },
 
   mounted() {
-    console.log("called mounted")
-    const vm = this
-    firebase.auth().onAuthStateChanged(function(user){
-      if(user){ //ログイン済みの場合
-        alert("ログイン済み")
-        vm.$router.push({name: "MyPage"})
+    console.log("called mounted");
+    const vm = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        //ログイン済みの場合
+        alert("ログイン済み");
+        vm.$router.push({ name: "MyPage" });
+      } else {
+        //未ログインの場合
       }
-      else{ //未ログインの場合
-        
-      }
-    })
-
+    });
   },
 };
 </script>
