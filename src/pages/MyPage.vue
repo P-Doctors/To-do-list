@@ -1,59 +1,60 @@
 <template>
-  <div id="app">
-    <!-- <button v-on:click="postTasklist">Make Task</button> -->
-    <div>
-      <header>自分の名前</header>
-      <p v-for="(task,index) in tasks" :key="index">
-        {{ task.text }}
-        <button v-on:click="deleteTasklist(index)">Delete Task</button>
-      </p>
-      <button>MAKE TASK<br>(YOUR FRIEND)</button>
-    </div>
+  <div>
+    <header>
+      <div>=== === === === ===</div>
+      <div>今日の日付 : </div>
+      <div>UserName : {{ loginUser.displayName }}</div>
+      <button v-on:click="signOut">SignOut</button>
+      <div>=== === === === ===</div>
+
+    </header>
+    <!-- <h1>TO DO LIST</h1>
+    <button>START</button> -->
   </div>
 </template>
-
 <script>
 import firebase from "firebase";
 
 export default {
-  data() {
-    return {
-      tasks: []
-    };
-  },
-  methods: {
-    // postTasklist() {
-    //   const task = {
-    //     text: "保存されたタスク"
-    //   };
-    //   firebase.firestore().collection("tasks")
-    //     .add(task)
-    //     .then(ref => {
-    //       this.tasks.push({
-    //         id: ref.id,
-    //         ...task
-    //       });
-    //     });
-    // },
-    deleteTasklist(index){
-      firebase.firestore().collection("tasks").delete()
-      this.tasks.splice(index,1)
+  data(){
+    return{
+      loginUser: {
+        displayName: "",
+      },
     }
   },
-  created() {
-    firebase
-      .firestore()
-      .collection("tasks")
-      .get()
-      .then(snapshot => {
-        snapshot.docs.forEach(doc => {
-          this.tasks.push({
-            id: doc.id,
-            ...doc.data()
-          });
-        });
-      });
-      console.log(this.tasks)
-  }
-};
+
+  methods: {
+    signOut() {
+      console.log("called siginOut")
+      const vm = this
+      firebase.auth().signOut()
+        .then(function(){
+          alert("SignOut completed")
+          vm.$router.push({name: "SignIn"})
+        })
+        .catch(function(error){
+          alert(error)
+        })
+    },
+  },
+
+  mounted() {
+    console.log("called mounted")
+    const vm = this
+    firebase.auth().onAuthStateChanged(function(user){
+      if(user){ //ログイン済みの場合
+        console.log(user)
+        console.log(user.displayName)
+        vm.loginUser.displayName = user.displayName
+      }
+      else{ //未ログインの場合
+        alert("You have to SignIn")
+        vm.$router.push({name: "SignIn"})
+      }
+    })
+  },
+
+  
+}
 </script>
