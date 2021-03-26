@@ -13,7 +13,7 @@
         <b>普通のTodolistに見えるけど、一味違うTodolist<br>
         何が違うのか興味がある人は下のStartボタンをクリック！</b>
       </p>
-      <router-link to="/auth" class="button3">START</router-link>
+      <router-link to="/signin" class="button3">START</router-link>
       <i class="fas fa-hand-point-up faa-bounce animated"></i>
     </main> 
     <footer></footer>  

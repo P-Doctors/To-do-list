@@ -24,7 +24,7 @@ export default {
       firebase.auth().signInWithPopup(provider)
         .then(function(response){
           console.log(response)
-          vm.$router.push({name: "Home"})
+          vm.$router.push({name: "MyPage"})
         })
     },
   },
@@ -35,7 +35,7 @@ export default {
     firebase.auth().onAuthStateChanged(function(user){
       if(user){ //ログイン済みの場合
         alert("ログイン済み")
-        vm.$router.push({name: "Home"})
+        vm.$router.push({name: "MyPage"})
       }
       else{ //未ログインの場合
         
