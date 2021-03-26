@@ -4,8 +4,8 @@
       <div class="todayDate">
         {{setToday}}
       </div>
-      <router-link to="/auth" class="button1">Sign in</router-link>
-      <router-link to="/auth" class="button2">Log in</router-link>
+      <router-link to="/signin" class="button1">Sign in</router-link>
+      <router-link to="/signin" class="button2">Log in</router-link>
     </header>
     <main>
       <h1>TO DO LIST</h1>

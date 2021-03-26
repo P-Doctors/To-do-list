@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import Home from '../pages/Home.vue'
 import Hoge from '../pages/Hoge.vue'
 import UserAuth from '../pages/UserAuth.vue'
+import SignIn from '../pages/SignIn.vue'
 
 
 Vue.use(VueRouter)
@@ -13,6 +14,7 @@ const routes = [
   {path: '/home', name: 'Home', component: Home },
   {path: '/hoge', name: 'Hoge', component: Hoge },
   {path: '/auth', name: 'UserAuth', component: UserAuth },
+  {path: '/signin', name: 'SignIn', component: SignIn },
 ]
 
 const router = new VueRouter({
