@@ -111,8 +111,7 @@ export default {
 
       firebase.firestore().collection("tasks")
         .doc(date+minutes+seconds)
-        .collection("tasks")
-        .add(task)
+        .set(task)
     },
     handleEventClick(clickInfo) {
       if (
