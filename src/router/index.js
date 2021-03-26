@@ -10,7 +10,7 @@ import SignIn from "../pages/SignIn.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/home", name: "Home", component: Home },
+  { path: "/", name: "Home", component: Home },
   { path: "/mypage", name: "MyPage", component: MyPage },
   { path: "/auth", name: "UserAuth", component: UserAuth },
   { path: "/signin", name: "SignIn", component: SignIn },
