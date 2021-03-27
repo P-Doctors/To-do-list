@@ -12,35 +12,42 @@
     <main>
       <h1>Your Task</h1>
       <div class="task-contents">
-        <div>
-          <div>【 New tweet 】</div>
-          <input type="text" v-model="tweetText" />
-          <button v-on:click="create">Submit</button>
+        <div class="tweet">
+          <div class="new-tweet">
+            <div>【 New tweet 】</div>
+            <input type="text" v-model="tweetText" />
+            <button v-on:click="create">Submit</button>
+          </div>
+          <hr />
+          <div class="selected-tweet">
+            <div>【 Selected tweet 】</div>
+            <div>ID : {{ selectedTweet.id }}</div>
+            <div>Text : <input type="text" v-model="selectedTweet.text" /></div>
+            <button v-on:click="update">Update</button>
+            <br />
+          </div>
+          <hr />
         </div>
-        <hr />
-        <div>
-          <div>【 Selected tweet 】</div>
-          <div>ID : {{ selectedTweet.id }}</div>
-          <div>Text : <input type="text" v-model="selectedTweet.text" /></div>
-          <button v-on:click="update">Update</button>
-          <br />
-        </div>
-        <hr />
+        <div>ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+          ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</div>
         <div
           class="task-content"
           v-for="(document, index) in documents"
           v-bind:key="index"
         >
-          <div>【 {{ index }} 】</div>
-          <div>ID : {{ document.id }}</div>
-          <div>Text : {{ document.data().text }}</div>
-          <div>
-            <button v-on:click="remove(document)">Remove</button>
-            <button v-on:click="edit(document)">Edit</button>
+          <!-- <div>【 {{ index }} 】</div>
+          <div>ID : {{ document.id }}</div> -->
+          <div class="task">
+            【{{ index + 1  }}】{{ document.data().text }}
+            <div>
+              <button v-on:click="remove(document)">Remove</button>
+              <button v-on:click="edit(document)">Edit</button>
+            </div>
           </div>
-          --- --- --- --- --- --- ---
+          <!-- --- --- --- --- --- --- --- -->
         </div>
       </div>
+      <router-link to="/selectuser" class="button2">Make Task</router-link>
     </main>
     <footer></footer>
   </div>
@@ -231,13 +238,62 @@ main h1 {
   font-size: 70px;
 }
 
+.tweet {
+  margin: 0 60px;
+  display: flex;
+  justify-content: center;
+}
+
 .task-contents {
   margin-top: 30px;
-  background-color: blue;
+  height: 350px;
+  background-color: #ffeed5;
+  border-radius: 80px;
+  color: black;
 }
 
 .task-content {
   text-align: center;
+  display: flex;
+  display: inline-block;
+}
+
+.task {
+  display: flex;
+  padding: 10px;
+  margin: 20px 40px;
+  flex-direction: column;
+  color: #ffffff;
+  background-color: #cd853f;
+  border-radius: 15px;
+}
+
+.button2 {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 580px;
+  text-align: center;
+  padding: 8px 24px;
+  display: inline-block;
+  text-align: right;
+  font-size: 40px;
+  opacity: 0.8;
+  border-radius: 4px;
+  border-bottom: 5px solid #b84c00;
+  background-color: orange;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.button2:active {
+  box-shadow: none;
+  position: relative;
+  top: 7px;
+}
+
+.button2:hover {
+  opacity: 1;
+  margin-top: 33px;
 }
 
 footer {
