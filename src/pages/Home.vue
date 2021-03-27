@@ -8,7 +8,7 @@
       <router-link to="/signin" class="button2">Log in</router-link>
     </header>
     <main>
-      <h1>TO DO LIST</h1>
+      <h1>TASK FRIENDS</h1>
       <p class="mainText">
         <b
           >普通のTodolistに見えるけど、一味違うTodolist<br />
