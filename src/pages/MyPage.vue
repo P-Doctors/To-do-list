@@ -1,10 +1,13 @@
 <template>
   <div>
     <header>
+      <div class="todayDate">
+        {{ setToday }}
+      </div>
+      <button v-on:click="signOut" class="button1">SignOut</button>
       <div class="userName">
         {{ loginUser.displayName }}
       </div>
-      <button v-on:click="signOut">SignOut</button>
     </header>
     <main>
       <h1>Your Task</h1>
@@ -132,6 +135,15 @@ export default {
     },
   },
 
+  computed: {
+    setToday() {
+      var hiduke = new Date();
+      var month = hiduke.getMonth() + 1;
+      var day = hiduke.getDate();
+      return month + "/" + day;
+    },
+  },
+
   created() {
     const vm = this;
     this.unsubscribe = this.collection.onSnapshot(function(snapshot) {
@@ -167,18 +179,50 @@ export default {
 header {
   padding: 10px;
   position: relative;
+}
+
+.todayDate {
+  margin-left: 640px;
+  display: inline-block;
+  text-align: center;
+  font-size: 50px;
+}
+
+.button1 {
+  margin-left: 270px;
+  padding: 8px 24px;
+  display: inline-block;
   text-align: right;
+  font-size: 35px;
+  opacity: 0.8;
+  border-radius: 4px;
+  border-bottom: 5px solid #b84c00;
+  background-color: orangered;
+  color: #ffffff;
+}
+
+.button1:active {
+  box-shadow: none;
+  position: relative;
+  top: 7px;
+}
+
+.button1:hover {
+  opacity: 1;
+  margin-top: 3px;
 }
 
 .userName {
+  display: inline-block;
   font-size: 30px;
+  margin-left: 40px;
 }
 
 main {
   background-color: #67c7d4;
   margin: 0 auto;
   padding: 20px;
-  height: 680px;
+  height: 642px;
 }
 
 main h1 {
@@ -188,6 +232,7 @@ main h1 {
 }
 
 .task-contents {
+  margin-top: 30px;
   background-color: blue;
 }
 

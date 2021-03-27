@@ -42,17 +42,17 @@ header {
 }
 
 .todayDate {
-  display: flex;
-  justify-content: center;
+  margin-left: 640px;
+  display: inline-block;
+  text-align: center;
   font-size: 50px;
 }
 
 .button1 {
+  margin-left: 310px;
   padding: 8px 24px;
-  position: absolute;
   display: inline-block;
-  top: 15px;
-  right: 10px;
+  text-align: right;
   font-size: 35px;
   opacity: 0.8;
   border-radius: 4px;
@@ -63,11 +63,10 @@ header {
 }
 
 .button2 {
+  margin-left: 20px;
   padding: 8px 24px;
-  position: absolute;
   display: inline-block;
-  top: 15px;
-  right: 200px;
+  text-align: right;
   font-size: 35px;
   opacity: 0.8;
   border-radius: 4px;
