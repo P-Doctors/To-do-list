@@ -12,7 +12,8 @@
     <main>
       <h1>Your Task</h1>
       <div class="task-contents">
-        <div class="tweet">
+        <!-- if(loginUser.displayName == user.displayName) -->
+        <div v-if="user" class="tweet">
           <div class="new-tweet">
             <div>【 New tweet 】</div>
             <input type="text" v-model="tweetText" />
@@ -26,10 +27,11 @@
             <button v-on:click="update">Update</button>
             <br />
           </div>
+          <div>
+            ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+          </div>
           <hr />
         </div>
-        <div>ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-          ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</div>
         <div
           class="task-content"
           v-for="(document, index) in documents"
@@ -38,10 +40,14 @@
           <!-- <div>【 {{ index }} 】</div>
           <div>ID : {{ document.id }}</div> -->
           <div class="task">
-            【{{ index + 1  }}】{{ document.data().text }}
+            【{{ index + 1 }}】{{ document.data().text }}
             <div>
-              <button v-on:click="remove(document)">Remove</button>
-              <button v-on:click="edit(document)">Edit</button>
+              <button v-on:click="remove(document)" class="remove-button">
+                Remove
+              </button>
+              <button v-on:click="edit(document)" class="edit-button">
+                Edit
+              </button>
             </div>
           </div>
           <!-- --- --- --- --- --- --- --- -->
@@ -69,6 +75,7 @@ export default {
         displayName: "",
       },
       tweetText: "",
+      user: false,
     };
   },
 
@@ -229,7 +236,7 @@ main {
   background-color: #67c7d4;
   margin: 0 auto;
   padding: 20px;
-  height: 642px;
+  height: 645px;
 }
 
 main h1 {
@@ -239,7 +246,7 @@ main h1 {
 }
 
 .tweet {
-  margin: 0 60px;
+  margin: 0px 60px;
   display: flex;
   justify-content: center;
 }
@@ -268,6 +275,11 @@ main h1 {
   border-radius: 15px;
 }
 
+.remove-button {
+  background-color: orangered;
+  color: #ffffff;
+  margin-right: 5px;
+}
 .button2 {
   margin-top: 30px;
   margin-bottom: 30px;
