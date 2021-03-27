@@ -45,9 +45,9 @@
               <button v-on:click="remove(document)" class="remove-button">
                 Remove
               </button>
-              <button v-on:click="edit(document)" class="edit-button">
+              <!-- <button v-on:click="edit(document)" class="edit-button">
                 Edit
-              </button>
+              </button> -->
             </div>
           </div>
           <!-- --- --- --- --- --- --- --- -->
@@ -177,7 +177,7 @@ export default {
         vm.loginUser.displayName = user.displayName;
       } else {
         //未ログインの場合
-        alert("You have to SignIn");
+        // alert("You have to SignIn");
         vm.$router.push({ name: "Home" });
       }
     });
