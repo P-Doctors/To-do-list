@@ -13,8 +13,8 @@
         <h1>Your Friend</h1>
       </div>
       <div class="friendList">
-        <div v-for="(name, index) in friendList" v-bind:key="index">
-          <p v-on:click="selectFriend(index)" class="friendName">{{ name }}</p>
+        <div v-for="userProfile in userProfiles" v-bind:key="userProfile.id">
+          <p v-on:click="selectFriend(userProfile.id)" class="friendName">{{ userProfile.name }}</p>
           <div>
             ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
           </div>
@@ -38,7 +38,7 @@ export default {
       loginUser: {
         displayName: "",
       },
-      friendList: ["たけし", "あきら", "しんじ", "たくみ"],
+      userProfiles: [],
     };
   },
   methods: {
@@ -78,6 +78,14 @@ export default {
         vm.$router.push({ name: "Home" });
       }
     });
+    firebase.firestore().collection("user_profiles").get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
+          this.userProfiles.push({
+            id: doc.id,
+            name: doc.data().name,
+          });
+        });
+      });
   },
 };
 </script>
@@ -98,7 +106,7 @@ header {
 .userName {
   display: inline-block;
   font-size: 30px;
-  margin-left: 520px;
+  margin-left: 480px;
 }
 
 main {

@@ -2,6 +2,7 @@
   <div class="demo-app">
     <div class="demo-app-sidebar">
       <div class="demo-app-sidebar-section">
+        <router-link to="/selectuser" class="button">Back</router-link>
         <h2>Instructions</h2>
         <ul>
           <li>Select dates and you will be prompted to create a new event</li>
@@ -104,19 +105,20 @@ export default {
           allDay: selectInfo.allDay,
         });
       }
-      const task = {
+      const tweet = {
         text: title,
       };
       // const today = new Date()
       // const date = String(today.getDate())
       // const minutes = String(today.getMinutes())
       // const seconds = String(today.getSeconds())
-
       firebase
         .firestore()
-        .collection("tasks")
+        .collection("tweets")
         .doc(String(this.id))
-        .set(task);
+        .update({
+          text: firebase.firestore.FieldValue.arrayUnion(tweet), // フィールド（配列）に要素'user1'を追加
+        })
     },
     handleEventClick(clickInfo) {
       if (
@@ -162,9 +164,34 @@ b {
   line-height: 1.5;
   background: #eaf9ff;
   border-right: 1px solid #d3e2e8;
+  color: black;
 }
 .demo-app-sidebar-section {
   padding: 2em;
+}
+.button {
+  margin-left: 50px;
+  margin-bottom: 20px;
+  padding: 10px;
+  display: inline-block;
+  text-align: right;
+  font-size: 25px;
+  opacity: 0.8;
+  border-radius: 4px;
+  border-bottom: 5px solid gray;
+  background-color: black;
+  color: #ffffff;
+  text-decoration: none;
+}
+.button:active {
+  box-shadow: none;
+  position: relative;
+  top: 7px;
+}
+
+.button:hover {
+  opacity: 1;
+  margin-top: 3px;
 }
 .demo-app-main {
   flex-grow: 1;

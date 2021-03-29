@@ -34,15 +34,15 @@
         </div>
         <div
           class="task-content"
-          v-for="(document, index) in documents"
+          v-for="(task, index) in tasks"
           v-bind:key="index"
         >
           <!-- <div>【 {{ index }} 】</div>
           <div>ID : {{ document.id }}</div> -->
           <div class="task">
-            【{{ index + 1 }}】{{ document.data().text }}
+            【{{ index + 1 }}】{{ task }}
             <div>
-              <button v-on:click="remove(document)" class="remove-button">
+              <button v-on:click="remove(index)" class="remove-button">
                 Remove
               </button>
               <!-- <button v-on:click="edit(document)" class="edit-button">
@@ -66,7 +66,7 @@ export default {
   data() {
     return {
       collection: firebase.firestore().collection("tweets"),
-      documents: [],
+      tasks: [],
       selectedTweet: {
         text: "",
         id: "",
@@ -99,10 +99,11 @@ export default {
     },
 
     // Remove(削除)
-    remove(document) {
+    remove(index) {
+      this.tasks.splice(index, 1);
       this.collection
-        .doc(document.id)
-        .delete()
+        .doc(this.loginUser.uid)
+        .set({ text: this.tasks })
         .then(function() {
           alert("Delete completed !!");
         })
@@ -159,11 +160,10 @@ export default {
   },
 
   created() {
-    const vm = this;
-    this.unsubscribe = this.collection.onSnapshot(function(snapshot) {
-      vm.documents = snapshot.docs;
-      console.log(vm.documents);
-    });
+    //   this.unsubscribe = this.collection.onSnapshot((snapshot) => {
+    // this.documents = snapshot.docs;
+    //   console.log(this.documents);
+    // });
   },
 
   mounted() {
@@ -174,7 +174,17 @@ export default {
         //ログイン済みの場合
         console.log(user);
         console.log(user.displayName);
+        console.log(user.uid);
         vm.loginUser.displayName = user.displayName;
+        vm.loginUser.uid = user.uid;
+        firebase
+          .firestore()
+          .collection("tweets")
+          .doc(user.uid)
+          .get()
+          .then((snapshot) => {
+            vm.tasks = snapshot.data().text;
+          });
       } else {
         //未ログインの場合
         // alert("You have to SignIn");
@@ -183,9 +193,9 @@ export default {
     });
   },
 
-  beforeDestroy() {
-    this.unsubscribe();
-  },
+  // beforeDestroy() {
+  //   this.unsubscribe();
+  // },
 };
 </script>
 
