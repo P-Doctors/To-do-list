@@ -14,7 +14,9 @@
       </div>
       <div class="friendList">
         <div v-for="userProfile in userProfiles" v-bind:key="userProfile.id">
-          <p v-on:click="selectFriend(userProfile.id)" class="friendName">{{ userProfile.name }}</p>
+          <p v-on:click="selectFriend(userProfile.id)" class="friendName">
+            {{ userProfile.name }}
+          </p>
           <div>
             ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
           </div>
@@ -47,12 +49,18 @@ export default {
       this.$router.push("/calendar");
     },
     selectFriend(index) {
-      this.$router.push({
-        name: "Calendar",
-        params: {
-          id: index,
-        },
-      });
+      console.log(this.loginUser.uid);
+      console.log(index);
+      if (this.loginUser.uid == index) {
+        alert("You can't choose yourself!");
+      } else {
+        this.$router.push({
+          name: "Calendar",
+          params: {
+            id: index,
+          },
+        });
+      }
     },
   },
   computed: {
@@ -71,21 +79,28 @@ export default {
         //ログイン済みの場合
         console.log(user);
         console.log(user.displayName);
+        console.log(user.uid);
         vm.loginUser.displayName = user.displayName;
+        vm.loginUser.uid = user.uid;
       } else {
         //未ログインの場合
         alert("You have to SignIn");
         vm.$router.push({ name: "Home" });
       }
     });
-    firebase.firestore().collection("user_profiles").get().then(snapshot => {
-        snapshot.docs.forEach(doc => {
+    firebase
+      .firestore()
+      .collection("user_profiles")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
           this.userProfiles.push({
             id: doc.id,
             name: doc.data().name,
           });
         });
       });
+    console.log(this.userProfiles.id);
   },
 };
 </script>
