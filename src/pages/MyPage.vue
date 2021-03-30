@@ -143,10 +143,10 @@ export default {
         .then(function() {
           alert("SignOut completed");
           vm.$router.push({ name: "Home" });
-        })
-        .catch(function(error) {
-          alert(error);
         });
+      // .catch(function(error) {
+      //   // alert(error);
+      // });
     },
   },
 
@@ -185,11 +185,12 @@ export default {
           .then((snapshot) => {
             vm.tasks = snapshot.data().text;
           });
-      } else {
-        //未ログインの場合
-        // alert("You have to SignIn");
-        vm.$router.push({ name: "Home" });
       }
+      //  else {
+      //   //未ログインの場合
+      //   // alert("You have to SignIn");
+      //   vm.$router.push({ name: "Home" });
+      // }
     });
   },
 

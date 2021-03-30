@@ -84,7 +84,7 @@ export default {
         vm.loginUser.uid = user.uid;
       } else {
         //未ログインの場合
-        alert("You have to SignIn");
+        // alert("You have to SignIn");
         vm.$router.push({ name: "Home" });
       }
     });
