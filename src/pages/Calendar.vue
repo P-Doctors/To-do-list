@@ -2,6 +2,7 @@
   <div class="demo-app">
     <div class="demo-app-sidebar">
       <div class="demo-app-sidebar-section">
+        <router-link to="/selectuser" class="button">Back</router-link>
         <h2>Instructions</h2>
         <ul>
           <li>Select dates and you will be prompted to create a new event</li>
@@ -40,8 +41,8 @@
   </div>
 </template>
 
-
-<script> // use FullCalendar
+<script>
+// use FullCalendar
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -51,6 +52,9 @@ import firebase from "firebase";
 export default {
   components: {
     FullCalendar, // make the <FullCalendar> tag available
+  },
+  props: {
+    id: Number,
   },
   data: function() {
     return {
@@ -101,17 +105,20 @@ export default {
           allDay: selectInfo.allDay,
         });
       }
-      const task = {
-        text: title
+      const tweet = {
+        text: title,
       };
-      const today = new Date()
-      const date = String(today.getDate())
-      const minutes = String(today.getMinutes())
-      const seconds = String(today.getSeconds())
-
-      firebase.firestore().collection("tasks")
-        .doc(date+minutes+seconds)
-        .set(task)
+      // const today = new Date()
+      // const date = String(today.getDate())
+      // const minutes = String(today.getMinutes())
+      // const seconds = String(today.getSeconds())
+      firebase
+        .firestore()
+        .collection("tweets")
+        .doc(String(this.id))
+        .update({
+          text: firebase.firestore.FieldValue.arrayUnion(tweet), // フィールド（配列）に要素'user1'を追加
+        })
     },
     handleEventClick(clickInfo) {
       if (
@@ -129,46 +136,70 @@ export default {
 };
 </script>
 
-
 <style scoped lang="css">
-  h2 {
-    margin: 0;
-    font-size: 16px;
-  }
-  ul {
-    margin: 0;
-    padding: 0 0 0 1.5em;
-  }
-  li {
-    margin: 1.5em 0;
-    padding: 0;
-  }
-  b {
-    /* used for event dates/times */
-    margin-right: 3px;
-  }
-  .demo-app {
-    display: flex;
-    min-height: 100%;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-  .demo-app-sidebar {
-    width: 300px;
-    line-height: 1.5;
-    background: #eaf9ff;
-    border-right: 1px solid #d3e2e8;
-  }
-  .demo-app-sidebar-section {
-    padding: 2em;
-  }
-  .demo-app-main {
-    flex-grow: 1;
-    padding: 3em;
-  }
-  .fc {
-    /* the calendar root */
-    max-width: 1100px;
-    margin: 0 auto;
-  }
+h2 {
+  margin: 0;
+  font-size: 16px;
+}
+ul {
+  margin: 0;
+  padding: 0 0 0 1.5em;
+}
+li {
+  margin: 1.5em 0;
+  padding: 0;
+}
+b {
+  /* used for event dates/times */
+  margin-right: 3px;
+}
+.demo-app {
+  display: flex;
+  min-height: 100%;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
+}
+.demo-app-sidebar {
+  width: 300px;
+  line-height: 1.5;
+  background: #eaf9ff;
+  border-right: 1px solid #d3e2e8;
+  color: black;
+}
+.demo-app-sidebar-section {
+  padding: 2em;
+}
+.button {
+  margin-left: 50px;
+  margin-bottom: 20px;
+  padding: 10px;
+  display: inline-block;
+  text-align: right;
+  font-size: 25px;
+  opacity: 0.8;
+  border-radius: 4px;
+  border-bottom: 5px solid gray;
+  background-color: black;
+  color: #ffffff;
+  text-decoration: none;
+}
+.button:active {
+  box-shadow: none;
+  position: relative;
+  top: 7px;
+}
+
+.button:hover {
+  opacity: 1;
+  margin-top: 3px;
+}
+.demo-app-main {
+  flex-grow: 1;
+  padding: 3em;
+}
+.fc {
+  /* the calendar root */
+  max-width: 1100px;
+  margin: 0 auto;
+}
 </style>

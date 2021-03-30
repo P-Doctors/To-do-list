@@ -7,6 +7,7 @@ import MyPage from "../pages/MyPage.vue";
 import UserAuth from "../pages/UserAuth.vue";
 import SignIn from "../pages/SignIn.vue";
 import SelectUser from "../pages/SelectUser.vue";
+import Calendar from "../pages/Calendar.vue";
 
 Vue.use(VueRouter);
 
@@ -16,6 +17,14 @@ const routes = [
   { path: "/auth", name: "UserAuth", component: UserAuth },
   { path: "/signin", name: "SignIn", component: SignIn },
   { path: "/selectuser", name: "SelectUser", component: SelectUser },
+  {
+    path: "/calendar/:id",
+    name: "Calendar",
+    component: Calendar,
+    props: (route) => ({
+      id: route.params.id,
+    }),
+  },
 ];
 
 const router = new VueRouter({
