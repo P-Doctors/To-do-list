@@ -105,9 +105,7 @@ export default {
           allDay: selectInfo.allDay,
         });
       }
-      const tweet = {
-        text: title,
-      };
+      const tweet = title
       // const today = new Date()
       // const date = String(today.getDate())
       // const minutes = String(today.getMinutes())
