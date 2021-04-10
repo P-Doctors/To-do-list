@@ -185,6 +185,11 @@ export default {
           .then((snapshot) => {
             vm.tasks = snapshot.data().text;
           });
+        firebase
+          .firestore()
+          .collection("user_profiles")
+          .doc(user.uid)
+          .set({ id: user.uid, name: user.displayName })
       }
       //  else {
       //   //未ログインの場合

@@ -23,7 +23,7 @@ export default {
     signIn() {
       console.log("called siginIn");
       const provider = new firebase.auth.GoogleAuthProvider();
-
+      console.log(provider);
       const vm = this;
       firebase
         .auth()
