@@ -46,7 +46,7 @@ export default {
   methods: {
     // クリックしたら指定した友達のMyPageに移動する
     friendMypage() {
-      this.$router.push("/calendar");
+      this.$router.push("/calendar").catch(() => {});
     },
     selectFriend(index) {
       console.log(this.loginUser.uid);
@@ -54,12 +54,14 @@ export default {
       if (this.loginUser.uid == index) {
         alert("You can't choose yourself!");
       } else {
-        this.$router.push({
-          name: "Calendar",
-          params: {
-            id: index,
-          },
-        });
+        this.$router
+          .push({
+            name: "Calendar",
+            params: {
+              id: index,
+            },
+          })
+          .catch(() => {});
       }
     },
   },
@@ -85,7 +87,7 @@ export default {
       } else {
         //未ログインの場合
         // alert("You have to SignIn");
-        vm.$router.push({ name: "Home" });
+        vm.$router.push({ name: "Home" }).catch(() => {});
       }
     });
     firebase
@@ -100,7 +102,6 @@ export default {
           });
         });
       });
-    console.log(this.userProfiles.id);
   },
 };
 </script>

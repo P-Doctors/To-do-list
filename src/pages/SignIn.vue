@@ -30,7 +30,7 @@ export default {
         .signInWithPopup(provider)
         .then(function(response) {
           console.log(response);
-          vm.$router.push({ name: "MyPage" });
+          vm.$router.push({ name: "MyPage" }).catch(() => {});
         });
     },
   },
@@ -42,7 +42,7 @@ export default {
       if (user) {
         //ログイン済みの場合
         alert("ログイン済み");
-        vm.$router.push({ name: "MyPage" });
+        vm.$router.push({ name: "MyPage" }).catch(() => {});
       } else {
         //未ログインの場合
       }

@@ -142,7 +142,7 @@ export default {
         .signOut()
         .then(function() {
           alert("SignOut completed");
-          vm.$router.push({ name: "Home" });
+          vm.$router.push({ name: "Home" }).catch(() => {});
         });
       // .catch(function(error) {
       //   // alert(error);
@@ -189,7 +189,7 @@ export default {
           .firestore()
           .collection("user_profiles")
           .doc(user.uid)
-          .set({ id: user.uid, name: user.displayName })
+          .set({ id: user.uid, name: user.displayName });
       }
       //  else {
       //   //未ログインの場合
