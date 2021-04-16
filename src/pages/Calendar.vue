@@ -54,7 +54,7 @@ export default {
     FullCalendar, // make the <FullCalendar> tag available
   },
   props: {
-    id: Number,
+    id: String,
   },
   data: function() {
     return {
